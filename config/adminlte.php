@@ -229,43 +229,20 @@ return [
         
         
         [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
+            'text'    => 'Configuracion',
+            'icon'    => 'fas fa-cog',
+            'active' => ['Configuracion/*'],
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
+                    'text'    => 'Usuarios',
+                    'icon'    => 'fas fa-cog',
+                    'route'  => 'configuracion.usuarios.index',
+                    'active' => ['Configuracion/Usuarios/*'],
                         ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
                 ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
+                
             ],
-        ],
+        
         
     ],
 
@@ -305,7 +282,7 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
