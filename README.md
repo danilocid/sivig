@@ -1,14 +1,15 @@
-# acerca del proyecto
+# Acerca del proyecto
 
 SIVIG es un sistema de gestion de inventario, ventas y gastos para una pequeña empresa
 
-# que hace hasta hoy
-
-### usuarios
+# Que hace hasta hoy
+## Administracion
+#### usuarios
+-   crear usuarios
 -   modificar datos de usuarios
 
 # que hara en un futuro
 
-### usuarios
+### Usuarios
 -   modificar los permisos de los usuarios
--   crear usuarios
+

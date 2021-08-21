@@ -8,7 +8,7 @@
 @stop
 
 @section('content')
-    
+
     
         <table id="example"  class="table table-striped table-bordered">
             <thead>
@@ -46,7 +46,12 @@
                 @endforeach
             </tbody>
         </table>
-    
+        <br>
+        <div class="btn-group">
+            <a type="button" class="btn btn-success" href="{{route('configuracion.usuarios.create')}}">Crear usuario</a>
+            
+            </div>
+           
     
 @stop
 
