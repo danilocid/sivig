@@ -8,7 +8,7 @@ SIVIG es un sistema de gestion de inventario, ventas y gastos para una pequeña 
 -   crear usuarios
 -   modificar datos de usuarios
 
-# que hara en un futuro
+# Que hara en un futuro
 
 ### Usuarios
 -   modificar los permisos de los usuarios

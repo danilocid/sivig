@@ -27,7 +27,7 @@
         {{-- Email field --}}
         <div class="input-group mb-3">
             <input type="text" name="user" class="form-control {{ $errors->has('user') ? 'is-invalid' : '' }}"
-                   value="{{ old('user') }}" placeholder="{{ __('adminlte::adminlte.user') }}" autofocus>
+                   value="{{ old('user') }}" placeholder="Usuario" autofocus>
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>

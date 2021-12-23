@@ -10,7 +10,7 @@
   
 <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Editar cliente</h3>
+          <h3 class="card-title">Editar usuario</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -48,7 +48,7 @@
                                 @endif    
                                 </select>
                         </div>
-                <button type="button" class="btn btn-primary pull-left" data-toggle="modal" data-target="#modal">Editar cliente</button>
+                <button type="button" class="btn btn-primary pull-left" data-toggle="modal" data-target="#modal">Editar usuario</button>
   <div class="modal fade" id="modal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -72,12 +72,13 @@
         </form>  
         </div>
               
-              
+      <br>    
           <!-- Fin contenido -->
         </div>
+</div> 
         <!-- /.card-body -->
         <div class="card-footer">
-        Editar cliente
+        Editar usuario
         </div>
         <!-- /.card-footer-->
       </div>
