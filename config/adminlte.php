@@ -224,10 +224,7 @@ return [
     |
     */
 
-    'menu' => [
-        
-        
-        
+    'menu' =>         [
         [
             'text'    => 'Configuracion',
             'icon'    => 'fas fa-cog',
@@ -237,15 +234,20 @@ return [
                     'text'    => 'Usuarios',
                     'icon'    => 'fas fa-cog',
                     'route'  => 'configuracion.usuarios.index',
-                    'active' => ['Configuracion/Usuarios/*'],
-                        ],
+                    'active' => ['Configuracion/Usuarios/*']
                 ],
-                
+                [
+                    'text'    => 'Medios de pago',
+                    'icon'    => 'fas fa-cog',
+                    'route'  => 'configuracion.mediosdepago.index',
+                    'active' => ['Configuracion/MediosDePago/*']
+                ],
             ],
-        
-        
-    ],
+        ],
 
+
+
+    ],
     /*
     |--------------------------------------------------------------------------
     | Menu Filters
