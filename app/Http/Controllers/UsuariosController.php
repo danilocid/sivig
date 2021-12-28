@@ -8,15 +8,18 @@ use Illuminate\Support\Facades\Hash;
 
 class UsuariosController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $usuarios = User::all();
         return view('administracion.usuarios.index', compact('usuarios'));
     }
-    public function create(){
-        
+    public function create()
+    {
+
         return view('administracion.usuarios.crear');
     }
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $usuario = new User();
 
         $usuario->name = $request->nombre;
@@ -24,24 +27,43 @@ class UsuariosController extends Controller
         $usuario->email = $request->email;
         $usuario->active = $request->activo;
         $usuario->password = Hash::make($request->password);
-
-        $usuario->save();
-        return redirect()->route('configuracion.usuarios.index');
-
+        try {
+            $usuario->save();
+            return redirect()->route('configuracion.usuarios.index')->with([
+                'error' => 'Exito',
+                'mensaje' => 'Usuario creado con exito',
+                'tipo' => 'alert-success'
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->route('configuracion.usuarios.index')->with([
+                'error' => 'Error',
+                'mensaje' => 'Usuario no pudo ser creado',
+                'tipo' => 'alert-danger'
+            ]);
+        }
     }
-    public function show($id){
+    public function show($id)
+    {
         $usuario = User::find($id);
         return view('administracion.usuarios.editar', compact('usuario'));
     }
 
-    public function update(Request $request, User $usuario){
+    public function update(Request $request, User $usuario)
+    {
         $usuario->name = $request->nombre;
         $usuario->user = $request->user;
         $usuario->email = $request->email;
         $usuario->active = $request->activo;
+        try {
+            $usuario->save();
+            return redirect()->route('configuracion.usuarios.index')->with([
+                'error' => 'Exito',
+                'mensaje' => 'Usuario modificado con exito',
+                'tipo' => 'alert-primary'
+            ]);
+        } catch (\Exception $e) {
 
-        $usuario->save();
-        return redirect()->route('configuracion.usuarios.index');
-       
+            return view('configuracion.usuarios.editar', compact('usuario'));
+        }
     }
 }

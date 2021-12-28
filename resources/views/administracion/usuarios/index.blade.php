@@ -5,6 +5,14 @@
 @section('content_header')
     <h1>Usuarios</h1>
     <p>Administracion de usuarios</p>
+    @if(session('error'))
+<div class="alert {{session('tipo')}} alert-dismissible fade show" role="alert">
+    <strong>{{session('error')}}</strong> {{session('mensaje')}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
 @stop
 
 @section('content')

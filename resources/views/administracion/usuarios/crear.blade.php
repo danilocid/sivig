@@ -77,7 +77,7 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-        Editar cliente
+        Crear cliente
         </div>
         <!-- /.card-footer-->
       </div>

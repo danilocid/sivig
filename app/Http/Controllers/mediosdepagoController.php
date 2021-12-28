@@ -38,10 +38,21 @@ class mediosdepagoController extends Controller
     {
         $medio = new mediosdepago();
 
-        $medio->name = $request->nombre;
+        $medio->medio_de_pago = ucfirst($request->medio_de_pago);
         
-        $medio->save();
-        return redirect()->route('configuracion.mediosdepago.index');
+        try{
+           
+            $medio->save();
+            return redirect()->route('configuracion.mediosdepago.index')->with(['error' => 'Exito',
+             'mensaje' => 'Medio de pago creado con exito',
+            'tipo'=> 'alert-success']);
+        }catch( \Exception $e ){
+            return redirect()->route('configuracion.mediosdepago.index')->with(['error' => 'Error',
+            'mensaje' => 'Medio de pago no pudo ser creado',
+           'tipo'=> 'alert-danger']);
+        }
+        
+       
     }
 
     /**
@@ -77,12 +88,13 @@ class mediosdepagoController extends Controller
     public function update(Request $request, mediosdepago $mediosdepago)
     {
         $mediosdepago = mediosdepago::find($request->id);
-        //$mediosdepago->id = $request->id;
-        $mediosdepago->medio_de_pago = $request->medio_de_pago;
+        $mediosdepago->medio_de_pago = ucfirst($request->medio_de_pago);
       
         try{
             $mediosdepago->save();
-            return redirect()->route('configuracion.mediosdepago.index');
+            return redirect()->route('configuracion.mediosdepago.index')->with(['error' => 'Exito',
+            'mensaje' => 'Medio de pago modificado con exito',
+            'tipo'=> 'alert-primary']);
         }catch( \Exception $e ){
             $medio = $mediosdepago;
             return view('administracion.mediosdepago.editar', compact('medio'));
