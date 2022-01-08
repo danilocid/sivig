@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             mediosdepagoSeeder::class,
             RegionSeeder::class,
             ComunaSeeder::class,
+            ClienteSeeder::class,
+            ProveedorSeeder::class,
         ]);
     }
 }

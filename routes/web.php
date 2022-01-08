@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\ComunasController;
 use App\Http\Controllers\mediosdepagoController;
+use App\Http\Controllers\ProveedoresController;
 use App\Http\Controllers\UsuariosController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,3 +40,23 @@ Route::put('Configuracion/Usuarios/{usuario}', [UsuariosController::class, 'upda
  Route::post('Configuracion/MediosDePago', [mediosdepagoController::class, 'store'])->name('configuracion.mediosdepago.store');
  Route::get('Configuracion/MediosDePago/{id}', [mediosdepagoController::class, 'show'])->name('configuracion.mediosdepago.editar');
  Route::put('Configuracion/MediosDePago/{id}', [mediosdepagoController::class, 'update'])->name('configuracion.mediosdepago.update');
+
+    // clientes
+
+Route::get('Clientes', [ClientesController::class, 'index'])->name('clientes.index');
+Route::get('Clientes/Crear', [ClientesController::class, 'create'])->name('clientes.create');
+Route::get('Clientes/{id}', [ClientesController::class, 'show'])->name('clientes.editar');
+Route::put('Clientes/{cliente}', [ClientesController::class, 'update'])->name('clientes.update');
+Route::post('Clientes', [ClientesController::class, 'store'])->name('clientes.store');
+
+//comunas
+
+Route::post('GetComunasPorRegion', [ComunasController::class, 'GetComunasPorRegion'])->name('GetComunasPorRegion');
+
+//proveedores
+
+Route::get('Proveedores', [ProveedoresController::class, 'index'])->name('proveedores.index');
+Route::get('Proveedores/Crear', [ProveedoresController::class, 'create'])->name('proveedores.create');
+Route::get('Proveedores/{id}', [ProveedoresController::class, 'show'])->name('proveedores.editar');
+Route::put('Proveedores/{proveedor}', [ProveedoresController::class, 'update'])->name('proveedores.update');
+Route::post('Proveedores', [ProveedoresController::class, 'store'])->name('proveedores.store');

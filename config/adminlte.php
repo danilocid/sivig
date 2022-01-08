@@ -226,6 +226,18 @@ return [
 
     'menu' =>         [
         [
+            'text'    => 'Clientes',
+            'icon'    => 'fas fa-user-friends',
+            'route'  => 'clientes.index',
+            'active' => ['Clientes/*']
+        ],
+        [
+            'text'    => 'Proveedores',
+            'icon'    => 'fas fa-warehouse',
+            'route'  => 'proveedores.index',
+            'active' => ['Proveedores/*']
+        ],
+        [
             'text'    => 'Configuracion',
             'icon'    => 'fas fa-cog',
             'active' => ['Configuracion/*'],
