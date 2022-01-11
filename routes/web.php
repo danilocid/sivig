@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticulosController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ComunasController;
 use App\Http\Controllers\mediosdepagoController;
@@ -60,3 +61,11 @@ Route::get('Proveedores/Crear', [ProveedoresController::class, 'create'])->name(
 Route::get('Proveedores/{id}', [ProveedoresController::class, 'show'])->name('proveedores.editar');
 Route::put('Proveedores/{proveedor}', [ProveedoresController::class, 'update'])->name('proveedores.update');
 Route::post('Proveedores', [ProveedoresController::class, 'store'])->name('proveedores.store');
+
+//articulos
+
+Route::get('Articulos', [ArticulosController::class, 'index'])->name('articulos.index');
+Route::get('Articulos/Crear', [ArticulosController::class, 'create'])->name('articulos.create');
+Route::get('Articulos/{id}', [ArticulosController::class, 'show'])->name('articulos.editar');
+Route::put('Articulos/{articulo}', [ArticulosController::class, 'update'])->name('articulos.update');
+Route::post('Articulos', [ArticulosController::class, 'store'])->name('articulos.store');

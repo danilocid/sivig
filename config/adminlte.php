@@ -226,6 +226,12 @@ return [
 
     'menu' =>         [
         [
+            'text'    => 'Articulos',
+            'icon'    => 'fas fa-boxes',
+            'route'  => 'articulos.index',
+            'active' => ['Articulos/*']
+        ],
+        [
             'text'    => 'Clientes',
             'icon'    => 'fas fa-user-friends',
             'route'  => 'clientes.index',

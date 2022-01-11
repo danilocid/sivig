@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
             ComunaSeeder::class,
             ClienteSeeder::class,
             ProveedorSeeder::class,
+            ArticuloSeeder::class,
+            TipoMovimientoSeeder::class,
+            TipoDocumentoSeeder::class,
         ]);
     }
 }
