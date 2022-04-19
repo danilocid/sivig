@@ -3,11 +3,18 @@
 @section('title', 'Crear articulo')
 
 @section('content_header')
-
+@if(session('error'))
+<div class="alert {{session('tipo')}} alert-dismissible fade show" role="alert">
+    <strong>{{session('error')}}</strong> {{session('mensaje')}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
 @stop
 
 @section('content')
-
+ <br>
 <div class="card">
   <div class="card-header">
     <h3 class="card-title">Crear articulo</h3>

@@ -25,7 +25,7 @@ class ArticulosController extends Controller
      */
     public function create()
     {
-       return view('articulos.crear');
+        return view('articulos.crear');
     }
 
     /**
@@ -35,7 +35,7 @@ class ArticulosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         $articulo = new Articulo();
         $articulo->cod_interno = $request->cod_interno;
         $articulo->cod_barras = $request->cod_barras;
@@ -56,12 +56,18 @@ class ArticulosController extends Controller
                 'tipo' => 'alert-success'
             ]);
         } catch (\Exception $e) {
-            return redirect()->route('articulos.index')->with([
+            if ($e->getCode() == 23000) {
+                return redirect()->route('articulos.create')->with([
+                    'error' => 'Error',
+                    'mensaje' => 'El articulo ya existe',
+                    'tipo' => 'alert-danger'
+                ]);
+            }
+            return redirect()->route('articulos.create')->with([
                 'error' => 'Error',
-                'mensaje' => 'Articulo no pudo ser creado'.$e->getMessage(),
+                'mensaje' => 'Articulo no pudo ser creado' . $e->getMessage(),
                 'tipo' => 'alert-danger'
             ]);
-            
         }
     }
 
@@ -73,8 +79,8 @@ class ArticulosController extends Controller
      */
     public function show($articulo)
     {
-       $articulo = Articulo::find($articulo);
-       return view('articulos.editar',compact('articulo'));
+        $articulo = Articulo::find($articulo);
+        return view('articulos.editar', compact('articulo'));
     }
 
     /**
@@ -115,7 +121,7 @@ class ArticulosController extends Controller
                 'tipo' => 'alert-primary'
             ]);
         } catch (\Exception $e) {
-           
+
             return view('articulos.editar', compact('articulo'));
         }
     }
