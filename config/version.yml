@@ -1,40 +1,39 @@
-mode: "absorb" # or 'increment'
+mode: increment
 blade-directive: version
 current:
   label: v
-  major: 1
+  major: 0
   minor: 0
-  patch: 0
-  prerelease:
-  buildmetadata:
-  commit: 100001
+  patch: 1
+  prerelease: null
+  buildmetadata: null
+  commit: d594d24
   timestamp:
-    mode: absorb
-    year:
-    month:
-    day:
-    hour:
-    minute:
-    second:
-    timezone:
+    year: 2022
+    month: 5
+    day: 1
+    hour: 22
+    minute: 55
+    second: 58
+    timezone: America/Santiago
 commit:
   mode: absorb
-  length: 6
+  length: 7
   increment-by: 1
 git:
-  from: "local" # or "remote"
+  from: local
   commit:
     local: "git rev-parse --verify HEAD"
     remote: "git ls-remote {$repository}"
   branch: refs/heads/main
-  repository: "" ### you can use config() to get it here: {{ config('version.git.remote.repository') }}. Do not use env()
+  repository: ""
   version:
     local: "git describe --tags"
     remote: "git ls-remote {$repository} | grep tags/ | grep -v {} | cut -d / -f 3 | sort --version-sort | tail -1"
     matcher: '/^(?P<label>[v|V]*[er]*[sion]*)[\.|\s]*(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)(?:-(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/'
   timestamp:
     local: "git show -s --format=%ci"
-    remote: "git show -s --format=%ci origin/main" ## we will have to find a better way
+    remote: "git show -s --format=%ci origin/main"
 format:
   regex:
     optional_bracket: '\[(?P<prefix>.*?)(?P<spaces>\s*)(?P<delimiter>\?\=)(?P<optional>.*?)\]'
@@ -46,10 +45,9 @@ format:
   buildmetadata: "{$buildmetadata}"
   commit: "{$commit}"
   version: "version {$major}.{$minor}.{$patch} (commit {$commit})"
-  version-only: "version {$major}.{$minor}.{$patch}"
-  ## Bracket enclosed expressions "[.?{$variable}]" are only rendered if the ?={$variable} is filled
+  version-only: "version {$major}.{$minor}.{$patch}.{$commit}"
   full: "{$version-only}[.?={$prerelease}][+?={$buildmetadata}] (commit {$commit})"
-  compact: "v{$major}.{$minor}.{$patch}-{$commit}"
+  compact: "v{$major}.{$minor}.{$patch} ({$timestamp-datetime})"
   timestamp-year: "{$timestamp.year}"
   timestamp-month: "{$timestamp.month}"
   timestamp-day: "{$timestamp.day}"
@@ -57,6 +55,5 @@ format:
   timestamp-minute: "{$timestamp.minute}"
   timestamp-second: "{$timestamp.second}"
   timestamp-timezone: "{$timestamp.timezone}"
-  timestamp-datetime: "{$timestamp.year}-{$timestamp.month}-{$timestamp.day} {$timestamp.hour}:{$timestamp.minute}:{$timestamp.second}"
+  timestamp-datetime: "{$timestamp.day}-{$timestamp.month}-{$timestamp.year}"
   timestamp-full: "{$timestamp.year}-{$timestamp.month}-{$timestamp.day} {$timestamp.hour}:{$timestamp.minute}:{$timestamp.second} {$timestamp.timezone}"
-  ## add as many formats as you need !!!!
