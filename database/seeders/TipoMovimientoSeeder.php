@@ -50,6 +50,11 @@ class TipoMovimientoSeeder extends Seeder
             "created_at" =>  \Carbon\Carbon::now(),
             "updated_at" => \Carbon\Carbon::now(),
         ]);
-
+        DB::table('tipo_movimientos')->insert([
+            'id' => 7,
+            'tipo_movimiento' => 'Regalo',
+            "created_at" =>  \Carbon\Carbon::now(),
+            "updated_at" => \Carbon\Carbon::now(),
+        ]);
     }
 }

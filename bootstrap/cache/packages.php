@@ -102,4 +102,26 @@
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
+  'pragmarx/version' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'PragmaRX\\Version\\Package\\ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Version' => 'PragmaRX\\Version\\Package\\Facade',
+    ),
+  ),
+  'pragmarx/yaml' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'PragmaRX\\Yaml\\Package\\ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Yaml' => 'PragmaRX\\Yaml\\Package\\Facade',
+    ),
+  ),
 );
