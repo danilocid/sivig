@@ -9,31 +9,27 @@ class Recepciones extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'id_recepcion',
-        'proveedor',
-        'documento',
-        'tipo_documento',
-        'total_neto',
-        'total_iva',
-        'unidades',
-        'observaciones',
-        'fecha_recepcion',
-        'usuario'
-    ];
+    protected $fillable = [];
+    public function
+    documentos()
+    {
+
+        //$this->belongsTo(TipoDocumentos::class, 'tipo_documentos_id');
+        return $this->belongsTo(tipo_documento::class, 'tipo_documentos_id', 'id');
+        // return null;
+    }
 
     public function proveedor()
     {
-        return $this->belongsTo(Proveedor::class);
+        // return $this->belongsTo(proveedor::class);
+
+        return $this->belongsTo(proveedor::class);
     }
 
-    public function tipodocumento()
-    {
-        return $this->belongsTo(tipo_documento::class);
-    }
 
-    public function usuario()
+
+    public function User()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

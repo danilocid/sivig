@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             ArticuloSeeder::class,
             TipoMovimientoSeeder::class,
             TipoDocumentoSeeder::class,
+            RecepcionesSeeder::class,
         ]);
     }
 }

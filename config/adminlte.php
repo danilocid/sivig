@@ -228,8 +228,22 @@ return [
         [
             'text'    => 'Articulos',
             'icon'    => 'fas fa-boxes',
-            'route'  => 'articulos.index',
-            'active' => ['Articulos/*']
+            'active' => ['Articulos/*'],
+            'submenu' =>
+            [
+                [
+                    'text'    => 'Articulos',
+                    'icon'    => 'fas fa-boxes',
+                    'route'  => 'articulos.index',
+                    'active' => ['Articulos/*']
+                ],
+                [
+                    'text'    => 'Recepciones',
+                    'icon'    => 'fas fa-truck-loading',
+                    'route'  => 'recepciones.index',
+                    'active' => ['Recepciones/*']
+                ],
+            ]
         ],
         [
             'text'    => 'Clientes',
