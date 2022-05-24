@@ -4,10 +4,10 @@ current:
   label: v
   major: 0
   minor: 0
-  patch: 2
+  patch: 3
   prerelease: null
   buildmetadata: null
-  commit: d594d24
+  commit: 1e7acc5
   timestamp:
     year: 2022
     month: 5
@@ -47,7 +47,7 @@ format:
   version: 'version {$major}.{$minor}.{$patch} (commit {$commit})'
   version-only: 'version {$major}.{$minor}.{$patch}.{$commit}'
   full: '{$version-only}[.?={$prerelease}][+?={$buildmetadata}] (commit {$commit})'
-  compact: 'v{$major}.{$minor}.{$patch} ({$timestamp-datetime})'
+  compact: 'v{$major}.{$minor}.{$patch}'
   timestamp-year: '{$timestamp.year}'
   timestamp-month: '{$timestamp.month}'
   timestamp-day: '{$timestamp.day}'

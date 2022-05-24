@@ -51,10 +51,6 @@ Route::get('Clientes/{id}', [ClientesController::class, 'show'])->name('clientes
 Route::put('Clientes/{cliente}', [ClientesController::class, 'update'])->name('clientes.update');
 Route::post('Clientes', [ClientesController::class, 'store'])->name('clientes.store');
 
-//comunas
-
-Route::post('GetComunasPorRegion', [ComunasController::class, 'GetComunasPorRegion'])->name('GetComunasPorRegion');
-
 //proveedores
 
 Route::get('Proveedores', [ProveedoresController::class, 'index'])->name('proveedores.index');
@@ -73,3 +69,4 @@ Route::post('Articulos', [ArticulosController::class, 'store'])->name('articulos
 
 //recepciones
 Route::get('Recepciones', [RecepcionesController::class, 'index'])->name('recepciones.index');
+Route::get('Recepciones/{id}', [RecepcionesController::class, 'view'])->name('recepciones.view');
