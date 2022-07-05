@@ -85,3 +85,8 @@
     } ); </script>
 @stop
 
+@section('footer')
+   <div class="float-right d-none d-sm-block">
+        <b>Version</b> @version('compact')       
+    </div>
+@stop
