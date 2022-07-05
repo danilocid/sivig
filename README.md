@@ -28,3 +28,4 @@ SIVIG es un sistema de gestion de inventario, ventas y gastos para una pequeña 
 # Comandos utiles
 
 -   `php artisan version:patch` : incrementa la version de la aplicacion, puede ser major, minor o patch (major.minor.patch)
+-   `php artisan migrate --seed` : ejecuta las migraciones y los seeders

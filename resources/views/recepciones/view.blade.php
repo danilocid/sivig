@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-
+<br>
 <div class="card">
   <div class="card-header">
     <h3 class="card-title">Ver recepcion</h3>
@@ -32,6 +32,10 @@
         <li>Usuario: {{$recepcion->user->name}}</li>
 
         <li>{{$recepcion}}</li>
+        <li>{{$detalle}}</li>
+        @foreach($detalle as $d)
+        <li>{{$d->Producto}}</li>
+        @endforeach
         
      </ul>
      
