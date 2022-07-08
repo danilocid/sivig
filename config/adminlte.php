@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => '',
+    'title' => 'Login',
     'title_prefix' => '',
     'title_postfix' => '| SIVIG',
 
@@ -46,8 +46,8 @@ return [
     */
 
     'logo' => '<b>SIVIG</b>',
-    'logo_img' => '',
-    'logo_img_class' => '',
+    'logo_img' => 'img/logo-perfil.jpg',
+    'logo_img_class' => 'logo-xs',
     'logo_img_xl' => null,
     'logo_img_xl_class' => '',
     'logo_img_alt' => '',
