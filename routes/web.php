@@ -69,4 +69,5 @@ Route::post('Articulos', [ArticulosController::class, 'store'])->name('articulos
 
 //recepciones
 Route::get('Recepciones', [RecepcionesController::class, 'index'])->name('recepciones.index');
+Route::get('Recepciones/Agregar', [RecepcionesController::class, 'create'])->name('recepciones.create');
 Route::get('Recepciones/{id}', [RecepcionesController::class, 'view'])->name('recepciones.view');

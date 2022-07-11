@@ -72,8 +72,8 @@
             <a
                 type="button"
                 class="btn btn-success"
-                href="{{{route('articulos.create')}}}"
-                >Crear articulo</a
+                href="{{{route('recepciones.create')}}}"
+                >Agregar recepcion</a
             >
         </div>
     </div>

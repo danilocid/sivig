@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Crear articulo')
+@section('title', 'Agregar recepcion')
 
 @section('content_header')
 @if(session('error'))
@@ -17,7 +17,7 @@
  <br>
 <div class="card">
   <div class="card-header">
-    <h3 class="card-title">Crear articulo</h3>
+    <h3 class="card-title">Agregar recepcion</h3>
 
     <div class="card-tools">
       <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
