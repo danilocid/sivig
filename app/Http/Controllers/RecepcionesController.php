@@ -18,6 +18,13 @@ class RecepcionesController extends Controller
     public function view($recepcion)
     {
         $recepcion = Recepciones::find($recepcion);
+        if ($recepcion == null) {
+            return redirect()->route('recepciones.index')->with([
+                'error' => 'Error',
+                'mensaje' => 'Recepcion no encontrada',
+                'tipo' => 'alert-danger'
+            ]);
+        }
         $detalle = DetalleRecepcion::where('recepcion_id', $recepcion->id)->get();
         return view('recepciones.view', compact(['recepcion', 'detalle']));
     }
@@ -25,6 +32,14 @@ class RecepcionesController extends Controller
     {
         $proveedores = Proveedor::all();
         $articulos = Articulo::all();
+        return view('recepciones.create', compact(['proveedores', 'articulos']));
+    }
+    public function addArticulo(Request $request)
+    {
+
+        $proveedores = Proveedor::all();
+        $articulos = Articulo::all();
+        session(['recepcion' => $articulos]);
         return view('recepciones.create', compact(['proveedores', 'articulos']));
     }
 }

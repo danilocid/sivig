@@ -59,7 +59,7 @@ class ProveedoresController extends Controller
         } catch (\Exception $e) {
             $regiones = Region::all();
             $comunas = Comuna::whereRegion_id($proveedor->region['id'])->get();
-            return view('proveedores.editar', compact(['proveedor','regiones','comunas']));
+            return view('proveedores.editar', compact(['proveedor', 'regiones', 'comunas']));
         }
     }
 
@@ -73,9 +73,9 @@ class ProveedoresController extends Controller
     {
         $proveedor = Proveedor::find($proveedor);
         $regiones = Region::all();
-       $comunas = Comuna::whereRegion_id($proveedor->region['id'])->get();
-        
-        return view('proveedores.editar', compact(['proveedor','regiones','comunas']));
+        $comunas = Comuna::whereRegion_id($proveedor->region['id'])->get();
+
+        return view('proveedores.editar', compact(['proveedor', 'regiones', 'comunas']));
     }
 
     /**
@@ -116,7 +116,7 @@ class ProveedoresController extends Controller
         } catch (\Exception $e) {
             $regiones = Region::all();
             $comunas = Comuna::whereRegion_id($proveedor->region['id'])->get();
-            return view('proveedores.editar', compact(['proveedor','regiones','comunas']));
+            return view('proveedores.editar', compact(['proveedor', 'regiones', 'comunas']));
         }
     }
 
