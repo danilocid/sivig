@@ -49,7 +49,7 @@
                                         ' - ' .
                                         $t['descripcion'] .
                                         '</option>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ';
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ';
                                 }
                                 ?>
                             </select>
@@ -58,19 +58,19 @@
                     <div class="row">
                         <div class="form-group col-6">
                             <label>Neto unitario</label>
-                            <input name="venta_neto" id="venta_neto" class="form-control" required type="number"
-                                oninput="ActualizaValorVentaTotal()">
+                            <input name="costo_neto" id="costo_neto" class="form-control" required type="number"
+                                oninput="ActualizaValorCostoTotal()">
                         </div>
                         <div class="form-group col-6">
                             <label>I.V.A.</label>
-                            <input name="venta_imp" id="venta_imp" readonly required type="number" class="form-control">
+                            <input name="costo_imp" id="costo_imp" readonly required type="number" class="form-control">
                         </div>
                     </div>
                     <div class="form-goup row">
                         <div class="form-group col-6">
                             <label>Total unitario</label>
-                            <input name="venta_total" id="venta_total" required type="number"
-                                oninput="ActualizaValorVentaNeto()" class="form-control">
+                            <input name="costo_total" id="costo_total" required type="number"
+                                oninput="ActualizaValorCostoNeto()" class="form-control">
                         </div>
                         <div class="col-6">
                             <label>Unidades</label>
@@ -103,17 +103,17 @@
 @section('js')
 
     <script>
-        function ActualizaValorVentaTotal() {
-            let valor = document.getElementById("venta_neto").value;
-            document.getElementById("venta_total").value = Math.round(valor * 1.19);
-            document.getElementById("venta_imp").value = Math.round((valor * 1.19) - valor);
+        function ActualizaValorCostoTotal() {
+            let valor = document.getElementById("costo_neto").value;
+            document.getElementById("costo_total").value = Math.round(valor * 1.19);
+            document.getElementById("costo_imp").value = Math.round((valor * 1.19) - valor);
 
         }
 
-        function ActualizaValorVentaNeto() {
-            let valor = document.getElementById("venta_total").value;
-            document.getElementById("venta_neto").value = Math.round(valor / 1.19);
-            document.getElementById("venta_imp").value = Math.round(valor - (valor / 1.19));
+        function ActualizaValorCostoNeto() {
+            let valor = document.getElementById("costo_total").value;
+            document.getElementById("costo_neto").value = Math.round(valor / 1.19);
+            document.getElementById("costo_imp").value = Math.round(valor - (valor / 1.19));
 
         }
     </script>

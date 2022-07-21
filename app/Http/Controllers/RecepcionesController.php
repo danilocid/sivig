@@ -12,6 +12,9 @@ class RecepcionesController extends Controller
 {
     public function index()
     {
+        if (session('recepcion')) {
+            session()->forget('recepcion');
+        }
         $recepciones = Recepciones::all();
         return view('recepciones.index', compact('recepciones'));
     }
@@ -36,10 +39,24 @@ class RecepcionesController extends Controller
     }
     public function addArticulo(Request $request)
     {
+        if (session('recepcion')) {
+            $recepcion = session('recepcion');
+        } else {
+            $recepcion = new DetalleRecepcion();
+
+            $recepcion->articulo = Articulo::find($request->articulo);
+            $recepcion->articulo_id = $request->articulo;
+            $recepcion->cantidad = $request->unidades;
+            $recepcion->precio_unitario = $request->costo_neto;
+            $recepcion->impuesto_unitario = $request->costo_imp;
+            session(['recepcion' => $recepcion]);
+        }
+
+
 
         $proveedores = Proveedor::all();
         $articulos = Articulo::all();
-        session(['recepcion' => $articulos]);
+
         return view('recepciones.create', compact(['proveedores', 'articulos']));
     }
 }
