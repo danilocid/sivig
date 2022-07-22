@@ -39,17 +39,44 @@ class RecepcionesController extends Controller
     }
     public function addArticulo(Request $request)
     {
+        $recepcion_new = [];
         if (session('recepcion')) {
             $recepcion = session('recepcion');
+
+            foreach (session('recepcion') as $value) {
+                if ($value['articulo_id'] == $request->articulo) {
+                    $recepcion_tmp = new DetalleRecepcion();
+
+                    $recepcion_tmp->articulo = Articulo::find($request->articulo);
+                    $recepcion_tmp->articulo_id = $request->articulo;
+                    $recepcion_tmp->cantidad = $request->unidades + $value['cantidad'];
+                    $recepcion_tmp->precio_unitario = $request->costo_neto;
+                    $recepcion_tmp->impuesto_unitario = $request->costo_imp;
+                    $recepcion_tmp->total = $request->costo_total * $request->unidades;
+                    array_push($recepcion_new, $recepcion_tmp);
+                } else {
+                    $recepcion_tmp = new DetalleRecepcion();
+
+                    $recepcion_tmp->articulo = Articulo::find($request->articulo);
+                    $recepcion_tmp->articulo_id = $request->articulo;
+                    $recepcion_tmp->cantidad = $request->unidades;
+                    $recepcion_tmp->precio_unitario = $request->costo_neto;
+                    $recepcion_tmp->impuesto_unitario = $request->costo_imp;
+                    $recepcion_tmp->total = $request->costo_total * $request->unidades;
+                    array_push($recepcion_new, $recepcion_tmp);
+                }
+            }
+            session(['recepcion' => $recepcion_new]);
         } else {
             $recepcion = new DetalleRecepcion();
-
             $recepcion->articulo = Articulo::find($request->articulo);
             $recepcion->articulo_id = $request->articulo;
             $recepcion->cantidad = $request->unidades;
             $recepcion->precio_unitario = $request->costo_neto;
             $recepcion->impuesto_unitario = $request->costo_imp;
-            session(['recepcion' => $recepcion]);
+            $recepcion->total = $request->costo_total * $request->unidades;
+            array_push($recepcion_new, $recepcion);
+            session(['recepcion' => $recepcion_new]);
         }
 
 

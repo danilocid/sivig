@@ -49,7 +49,7 @@
                                         ' - ' .
                                         $t['descripcion'] .
                                         '</option>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ';
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ';
                                 }
                                 ?>
                             </select>
@@ -58,8 +58,8 @@
                     <div class="row">
                         <div class="form-group col-6">
                             <label>Neto unitario</label>
-                            <input name="costo_neto" id="costo_neto" class="form-control" required type="number"
-                                oninput="ActualizaValorCostoTotal()">
+                            <input name="costo_neto" id="costo_neto" min="1" class="form-control" required
+                                type="number" oninput="ActualizaValorCostoTotal()">
                         </div>
                         <div class="form-group col-6">
                             <label>I.V.A.</label>
@@ -69,12 +69,12 @@
                     <div class="form-goup row">
                         <div class="form-group col-6">
                             <label>Total unitario</label>
-                            <input name="costo_total" id="costo_total" required type="number"
+                            <input name="costo_total" id="costo_total" min="1" required type="number"
                                 oninput="ActualizaValorCostoNeto()" class="form-control">
                         </div>
                         <div class="col-6">
                             <label>Unidades</label>
-                            <input name="unidades" required type="number" class="form-control">
+                            <input name="unidades" required min="1" type="number" class="form-control">
                         </div>
                     </div>
                     <br>
@@ -83,7 +83,12 @@
                 </form>
             </div>
             @if (session('recepcion'))
-                {{ session('recepcion') }}
+
+                @foreach (session('recepcion') as $a => $r)
+                    <br>
+                    {{ $r }}
+                    <br>
+                @endforeach
             @endif
 
             <br>
