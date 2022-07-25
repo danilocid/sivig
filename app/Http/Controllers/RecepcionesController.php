@@ -6,6 +6,7 @@ use App\Models\DetalleRecepcion;
 use App\Models\Recepciones;
 use App\models\Articulo;
 use App\models\Proveedor;
+use App\Models\tipo_documento;
 use Illuminate\Http\Request;
 
 class RecepcionesController extends Controller
@@ -40,6 +41,7 @@ class RecepcionesController extends Controller
     public function addArticulo(Request $request)
     {
         $recepcion_new = [];
+        $recepcion_flag = false;
         if (session('recepcion')) {
             $recepcion = session('recepcion');
 
@@ -54,17 +56,29 @@ class RecepcionesController extends Controller
                     $recepcion_tmp->impuesto_unitario = $request->costo_imp;
                     $recepcion_tmp->total = $request->costo_total * $request->unidades;
                     array_push($recepcion_new, $recepcion_tmp);
+                    $recepcion_flag = true;
                 } else {
                     $recepcion_tmp = new DetalleRecepcion();
 
-                    $recepcion_tmp->articulo = Articulo::find($request->articulo);
-                    $recepcion_tmp->articulo_id = $request->articulo;
-                    $recepcion_tmp->cantidad = $request->unidades;
-                    $recepcion_tmp->precio_unitario = $request->costo_neto;
-                    $recepcion_tmp->impuesto_unitario = $request->costo_imp;
-                    $recepcion_tmp->total = $request->costo_total * $request->unidades;
+                    $recepcion_tmp->articulo = Articulo::find($value->articulo_id);
+                    $recepcion_tmp->articulo_id = $value->articulo_id;
+                    $recepcion_tmp->cantidad = $value['cantidad'];
+                    $recepcion_tmp->precio_unitario = $value['precio_unitario'];
+                    $recepcion_tmp->impuesto_unitario = $value['impuesto_unitario'];
+                    $recepcion_tmp->total = $value['total'];
                     array_push($recepcion_new, $recepcion_tmp);
                 }
+            }
+            if ($recepcion_flag == false) {
+                $recepcion_tmp = new DetalleRecepcion();
+
+                $recepcion_tmp->articulo = Articulo::find($request->articulo);
+                $recepcion_tmp->articulo_id = $request->articulo;
+                $recepcion_tmp->cantidad = $request->unidades;
+                $recepcion_tmp->precio_unitario = $request->costo_neto;
+                $recepcion_tmp->impuesto_unitario = $request->costo_imp;
+                $recepcion_tmp->total = $request->costo_total * $request->unidades;
+                array_push($recepcion_new, $recepcion_tmp);
             }
             session(['recepcion' => $recepcion_new]);
         } else {
@@ -83,7 +97,8 @@ class RecepcionesController extends Controller
 
         $proveedores = Proveedor::all();
         $articulos = Articulo::all();
+        $tipo_documento = tipo_documento::all();
 
-        return view('recepciones.create', compact(['proveedores', 'articulos']));
+        return view('recepciones.create', compact(['proveedores', 'articulos', 'tipo_documento']));
     }
 }

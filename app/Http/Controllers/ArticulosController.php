@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articulo;
+use App\models\Proveedor;
+use App\Models\tipo_documento;
 use Illuminate\Http\Request;
 
 class ArticulosController extends Controller
@@ -50,6 +52,17 @@ class ArticulosController extends Controller
 
         try {
             $articulo->save();
+            if (session('recepcion')) {
+                $proveedores = Proveedor::all();
+                $articulos = Articulo::all();
+                $tipo_documento = tipo_documento::all();
+
+                return view('recepciones.create', compact(['proveedores', 'articulos', 'tipo_documento']))->with([
+                    'error' => 'Exito',
+                    'mensaje' => 'Articulo creado con exito',
+                    'tipo' => 'alert-success'
+                ]);
+            }
             return redirect()->route('articulos.index')->with([
                 'error' => 'Exito',
                 'mensaje' => 'Articulo creado con exito',

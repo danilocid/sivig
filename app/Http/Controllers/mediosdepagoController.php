@@ -39,20 +39,22 @@ class mediosdepagoController extends Controller
         $medio = new mediosdepago();
 
         $medio->medio_de_pago = ucfirst($request->medio_de_pago);
-        
-        try{
-           
+
+        try {
+
             $medio->save();
-            return redirect()->route('configuracion.mediosdepago.index')->with(['error' => 'Exito',
-             'mensaje' => 'Medio de pago creado con exito',
-            'tipo'=> 'alert-success']);
-        }catch( \Exception $e ){
-            return redirect()->route('configuracion.mediosdepago.index')->with(['error' => 'Error',
-            'mensaje' => 'Medio de pago no pudo ser creado',
-           'tipo'=> 'alert-danger']);
+            return redirect()->route('configuracion.mediosdepago.index')->with([
+                'error' => 'Exito',
+                'mensaje' => 'Medio de pago creado con exito',
+                'tipo' => 'alert-success'
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->route('configuracion.mediosdepago.index')->with([
+                'error' => 'Error',
+                'mensaje' => 'Medio de pago no pudo ser creado',
+                'tipo' => 'alert-danger'
+            ]);
         }
-        
-       
     }
 
     /**
@@ -89,17 +91,18 @@ class mediosdepagoController extends Controller
     {
         $mediosdepago = mediosdepago::find($request->id);
         $mediosdepago->medio_de_pago = ucfirst($request->medio_de_pago);
-      
-        try{
+
+        try {
             $mediosdepago->save();
-            return redirect()->route('configuracion.mediosdepago.index')->with(['error' => 'Exito',
-            'mensaje' => 'Medio de pago modificado con exito',
-            'tipo'=> 'alert-primary']);
-        }catch( \Exception $e ){
+            return redirect()->route('configuracion.mediosdepago.index')->with([
+                'error' => 'Exito',
+                'mensaje' => 'Medio de pago modificado con exito',
+                'tipo' => 'alert-primary'
+            ]);
+        } catch (\Exception $e) {
             $medio = $mediosdepago;
             return view('administracion.mediosdepago.editar', compact('medio'));
         }
-       
     }
 
     /**
