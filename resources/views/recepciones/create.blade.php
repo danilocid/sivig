@@ -51,7 +51,7 @@
                                             ' - ' .
                                             $t['descripcion'] .
                                             '</option>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ';
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ';
                                     }
                                     ?>
                                 </select>
@@ -83,65 +83,141 @@
                         <br>
                         <button type="submit" class="btn btn-primary pull-left">Agregar articulo</button>
                         <div class="btn-group">
-
-
-                            <a type="button" class="btn btn-success" href="{{ route('articulos.create') }}">Crear
-                                articulo</a>
-                        </div>
-
-                        <div class="btn-group float-right">
-                            <button type="button" class="btn btn-warning pull-right" data-toggle="modal"
-                                data-target="#modal-default">
-                                Finalizar recepcion
-                            </button>
-                        </div>
                     </form>
 
-
+                    <a type="button" class="btn btn-success" href="{{ route('articulos.create') }}">Crear
+                        articulo</a>
                 </div>
                 @if (session('recepcion'))
-                    <div class="col-md-6">
-                        @php
-                            $total_unidades = 0;
-                            $total_costo_neto = 0;
-                            $total_costo_imp = 0;
-                            $total_costo_total = 0;
-                            
-                            foreach (session('recepcion') as $r) {
-                                $total_unidades += $r->cantidad;
-                                $total_costo_neto += $r->precio_unitario * $r->cantidad;
-                                $total_costo_imp += $r->impuesto_unitario * $r->cantidad;
-                                $total_costo_total += ($r->precio_unitario + $r->impuesto_unitario) * $r->cantidad;
-                            }
-                        @endphp
+                    @php
+                        $total_unidades = 0;
+                        $total_costo_neto = 0;
+                        $total_costo_imp = 0;
+                        $total_costo_total = 0;
+                        
+                        foreach (session('recepcion') as $r) {
+                            $total_unidades += $r->cantidad;
+                            $total_costo_neto += $r->precio_unitario * $r->cantidad;
+                            $total_costo_imp += $r->impuesto_unitario * $r->cantidad;
+                            $total_costo_total += ($r->precio_unitario + $r->impuesto_unitario) * $r->cantidad;
+                        }
+                    @endphp
+                    <div class="btn-group float-right">
+                        <button type="button" class="btn btn-warning pull-right" data-toggle="modal"
+                            data-target="#modal-default">
+                            Finalizar recepcion
+                        </button>
+                    </div>
+                    <div class="modal fade" id="modal-default">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Finalizar recepcion</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form role="form" action="AgregarRecepciones" method="POST">
+                                        <div class="form-group">
+                                            <label>Tipo documento</label>
+                                            <select id="tipo_documento" name="tipo_documento" class="form-control select2">
+                                                @foreach ($tipo_documento as $t)
+                                                    <option value="{{ $t->id }}">{{ $t->tipo_documento }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Numero documento</label>
+                                            <input id="numero_documento" name="numero_documento" required type="number"
+                                                class="form-control input-sm">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Proveedor</label>
+                                            <select id="proveedor" name="proveedor" required class="form-control select2">
+                                                <option value="">Seleccionar</option>
+                                                @foreach ($proveedores as $p)
+                                                    <option value="{{ $p->id }}">{{ $p->razon_social }}
+                                                        ({{ $p->rut }})
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Observaciones</label>
+                                            <input id="observaciones" required name="observaciones" type="text"
+                                                class="form-control input-sm" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Monto total</label>
+                                            <input id="monto_total" name="monto_total" disabled type="text"
+                                                class="form-control input-sm"
+                                                value="${{ number_format($total_costo_total, 0, ',', '.') }}">
+                                            <input id="monto_neto" name="monto_neto" type="hidden"
+                                                class="form-control input-sm" value="{{ $total_costo_neto }}">
+                                            <input id="monto_imp" name="monto_imp" type="hidden"
+                                                class="form-control input-sm" value=" {{ $total_costo_imp }}">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Total articulos</label>
+                                            <input id="total_articulos" name="total_articulos" readonly type="text"
+                                                class="form-control input-sm"
+                                                value="{{ number_format($total_unidades, 0, ',', '.') }}">
+                                        </div>
 
 
-                        <ol>
-                            <li><Strong>Total unidades: </Strong>{{ number_format($total_unidades, 0, ',', '.') }}</li>
-                            <li><Strong>Total costo neto: </Strong>${{ number_format($total_costo_neto, 0, ',', '.') }}</li>
-                            <li><Strong>Total costo impuesto: </Strong>${{ number_format($total_costo_imp, 0, ',', '.') }}
-                            </li>
-                            <li><Strong>Total costo total: </Strong>${{ number_format($total_costo_total, 0, ',', '.') }}
-                            </li>
-                        </ol>
-
-                        <br>
-
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default pull-left"
+                                        data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Agregar recepcion</button>
+                                    <button type="button" class="btn btn-info" data-dismiss="modal" data-toggle="modal"
+                                        data-target="#modal-default2">
+                                        Crear proveedor
+                                    </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 @endif
+
+
+
             </div>
+            @if (session('recepcion'))
+                <div class="col-md-6">
+
+
+
+                    <ol>
+                        <li><Strong>Total unidades: </Strong>{{ number_format($total_unidades, 0, ',', '.') }}</li>
+                        <li><Strong>Total costo neto: </Strong>${{ number_format($total_costo_neto, 0, ',', '.') }}</li>
+                        <li><Strong>Total costo impuesto: </Strong>${{ number_format($total_costo_imp, 0, ',', '.') }}
+                        </li>
+                        <li><Strong>Total costo total: </Strong>${{ number_format($total_costo_total, 0, ',', '.') }}
+                        </li>
+                    </ol>
+
+                    <br>
+
+                </div>
+            @endif
         </div>
+    </div>
 
-        <br>
+    <br>
 
-        <!-- Fin contenido -->
+    <!-- Fin contenido -->
 
 
-        <!-- /.card-body -->
-        <div class="card-footer">
-            Crear articulo
-        </div>
-        <!-- /.card-footer-->
+    <!-- /.card-body -->
+    <div class="card-footer">
+        Crear articulo
+    </div>
+    <!-- /.card-footer-->
     </div>
     @if (session('recepcion'))
         <div class="card">
