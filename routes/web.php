@@ -7,6 +7,8 @@ use App\Http\Controllers\mediosdepagoController;
 use App\Http\Controllers\ProveedoresController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\RecepcionesController;
+use App\Http\Controllers\VentasController;
+use App\Http\Controllers\DetalleVentasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -64,6 +66,7 @@ Route::post('Proveedores', [ProveedoresController::class, 'store'])->name('prove
 Route::get('Articulos', [ArticulosController::class, 'index'])->name('articulos.index');
 Route::get('Articulos/Crear', [ArticulosController::class, 'create'])->name('articulos.create');
 Route::get('Articulos/{id}', [ArticulosController::class, 'show'])->name('articulos.editar');
+Route::get('Articulos/{id}/historial', [ArticulosController::class, 'getHistorialArticulo'])->name('articulos.historial');
 Route::put('Articulos/{articulo}', [ArticulosController::class, 'update'])->name('articulos.update');
 Route::post('Articulos', [ArticulosController::class, 'store'])->name('articulos.store');
 
@@ -72,3 +75,8 @@ Route::get('Recepciones', [RecepcionesController::class, 'index'])->name('recepc
 Route::get('Recepciones/Agregar', [RecepcionesController::class, 'create'])->name('recepciones.create');
 Route::get('Recepciones/{id}', [RecepcionesController::class, 'view'])->name('recepciones.view');
 Route::post('Recepciones/Agregar', [RecepcionesController::class, 'addArticulo'])->name('recepciones.addarticulo');
+Route::post('Recepciones/Finalizar', [RecepcionesController::class, 'store'])->name('recepciones.store');
+
+//ventas
+Route::get('Ventas', [VentasController::class, 'index'])->name('ventas.index');
+Route::get('Ventas/{id}', [DetalleVentasController::class, 'show'])->name('ventas.show');

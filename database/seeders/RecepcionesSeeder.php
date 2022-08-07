@@ -21,7 +21,7 @@ class RecepcionesSeeder extends Seeder
             'tipo_documentos_id' => 33,
             'total_neto' => 100,
             'total_iva' => 19,
-            'unidades' => 1,
+            'unidades' => 2,
             'observaciones' => 'Recepcion de prueba',
             'fecha_recepcion' => '2022-05-27',
             'user_id' => 1,

@@ -7,7 +7,10 @@ use App\Models\Recepciones;
 use App\models\Articulo;
 use App\models\Proveedor;
 use App\Models\tipo_documento;
+use App\Models\DetalleMovimientosArticulos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class RecepcionesController extends Controller
 {
@@ -19,9 +22,9 @@ class RecepcionesController extends Controller
         $recepciones = Recepciones::all();
         return view('recepciones.index', compact('recepciones'));
     }
-    public function view($recepcion)
+    public function view($id)
     {
-        $recepcion = Recepciones::find($recepcion);
+        $recepcion = Recepciones::find($id);
         if ($recepcion == null) {
             return redirect()->route('recepciones.index')->with([
                 'error' => 'Error',
@@ -29,7 +32,9 @@ class RecepcionesController extends Controller
                 'tipo' => 'alert-danger'
             ]);
         }
-        $detalle = DetalleRecepcion::where('recepcion_id', $recepcion->id)->get();
+        $detalle = DetalleRecepcion::where('recepcion_id', $id)->get();
+        //return [$recepcion, $detalle];
+        // return $detalle;
         return view('recepciones.view', compact(['recepcion', 'detalle']));
     }
     public function create()
@@ -100,5 +105,51 @@ class RecepcionesController extends Controller
         $tipo_documento = tipo_documento::all();
 
         return view('recepciones.create', compact(['proveedores', 'articulos', 'tipo_documento']));
+    }
+    public function store(Request $request)
+    {
+
+        $recepcion = new Recepciones();
+        $recepcion->proveedor_id = $request->proveedor;
+        $recepcion->documento = $request->numero_documento;
+        $recepcion->tipo_documentos_id = $request->tipo_documento;
+        $recepcion->total_neto = $request->monto_neto;
+        $recepcion->total_iva = $request->monto_imp;
+        $recepcion->unidades = $request->total_articulos;
+        $recepcion->fecha_recepcion = Carbon::now()->format('Y-m-d');
+        $recepcion->observaciones = $request->observaciones;
+        $recepcion->user_id = Auth::user()->id;
+        $recepcion->timestamps = false;
+        $recepcion->save();
+        $detalle = session('recepcion');
+        foreach ($detalle as $value) {
+            $detalle_recepcion = new DetalleRecepcion();
+            $detalle_recepcion->recepcion_id = $recepcion->id;
+            $detalle_recepcion->producto_id = $value->articulo_id;
+            $detalle_recepcion->cantidad = $value->cantidad;
+            $detalle_recepcion->precio_unitario = $value->precio_unitario;
+            $detalle_recepcion->impuesto_unitario = $value->impuesto_unitario;
+            $detalle_recepcion->save();
+
+            $articulo = Articulo::find($value->articulo_id);
+            $articulo->stock = $articulo->stock + $value->cantidad;
+            $articulo->costo_neto = $value->precio_unitario;
+            $articulo->costo_imp = $value->impuesto_unitario;
+            $articulo->save();
+
+            $detalleMovimiento = new DetalleMovimientosArticulos();
+            $detalleMovimiento->movimiento_id = 1; // 1 = recepciones
+            $detalleMovimiento->id_movimiento = $recepcion->id;
+            $detalleMovimiento->producto_id = $value->articulo_id;
+            $detalleMovimiento->cantidad = $value->cantidad;
+            $detalleMovimiento->usuario_id = Auth::user()->id;
+            $detalleMovimiento->save();
+        }
+        session()->forget('recepcion');
+        return redirect()->route('recepciones.index')->with([
+            'error' => 'Error',
+            'mensaje' => 'Recepcion creada correctamente con el numero ' . $recepcion->id,
+            'tipo' => 'alert-success'
+        ]);
     }
 }

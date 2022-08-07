@@ -226,6 +226,12 @@ return [
 
     'menu' =>         [
         [
+            'text'    => 'Ventas',
+            'icon'    => 'fas fa-file-invoice',
+            'route'  => 'ventas.index',
+            'active' => ['Ventas/*']
+        ],
+        [
             'text'    => 'Articulos',
             'icon'    => 'fas fa-boxes',
             'active' => ['Articulos/*'],

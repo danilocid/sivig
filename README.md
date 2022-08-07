@@ -50,7 +50,6 @@ SIVIG es un sistema de gestion de inventario, ventas y gastos para una pequeña 
 
 -   falta boton de exportacion a PDF
 -   falta ver detalle de compras de proveedores
--
 
 ### Gastos
 
@@ -74,8 +73,10 @@ SIVIG es un sistema de gestion de inventario, ventas y gastos para una pequeña 
 -   en pantalla de inicio faltan widget con datos resumen (ventas, saldo en cuentas bancarias, etc)
 -   Falta integracion con API MercadoLibre
 -   Falta integracion con API Prestashop
+-   Falta integracion con ApiSii.cl https://apisii.cl/ (api se bloquea por 3 dias si se reciben consultas con error)
 
 # Comandos utiles
 
 -   `php artisan version:patch` : incrementa la version de la aplicacion, puede ser major, minor o patch (major.minor.patch)
 -   `php artisan migrate --seed` : ejecuta las migraciones y los seeders
+-   `php artisan make:model Todo -mcrs` : crea un modelo con el nombre Todo junto al controlador y el archivo de migracion y el seeder

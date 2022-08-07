@@ -25,6 +25,9 @@ class DatabaseSeeder extends Seeder
             TipoDocumentoSeeder::class,
             RecepcionesSeeder::class,
             DetalleRecepcionSeeder::class,
+            VentasSeeder::class,
+            DetalleVentasSeeder::class,
+            DetalleMovimientosArticulosSeeder::class,
         ]);
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Articulo;
 use App\models\Proveedor;
 use App\Models\tipo_documento;
 use Illuminate\Http\Request;
+use App\Models\DetalleMovimientosArticulos;
 
 class ArticulosController extends Controller
 {
@@ -148,5 +149,13 @@ class ArticulosController extends Controller
     public function destroy(Articulo $articulo)
     {
         //
+    }
+
+    public function getHistorialArticulo($id)
+    {
+        $articulo = Articulo::find($id);
+        $historial = DetalleMovimientosArticulos::where('producto_id', $id)->get();
+        return view('articulos.historial', compact(['articulo', 'historial']));
+        //return ['articulo' => $articulo, 'historial' => $historial];
     }
 }

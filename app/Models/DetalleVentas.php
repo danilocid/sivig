@@ -5,12 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DetalleRecepcion extends Model
+class DetalleVentas extends Model
 {
     use HasFactory;
-
-    protected $fillable = [];
-
     public function Producto()
     {
 

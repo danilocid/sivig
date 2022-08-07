@@ -29,7 +29,7 @@
                     <td>Stock</td>
                     <td>PVP</td>
                     <td>Activo</td>
-                    <td>Editar</td>
+                    <td>Acciones</td>
                 </tr>
             </thead>
             <tbody>
@@ -50,6 +50,10 @@
                         
                         <td><div class="btn-group">
                             <a type="button" class="btn btn-success" href="{{route('articulos.editar', $u->id)}}">Datos</a>
+                            </div>
+                            <div class="btn-group">
+
+                            <a type="button" class="btn btn-success" href="{{route('articulos.historial', $u->id)}}">Historial</a>
                             
                           </div></td>
                     </tr>
