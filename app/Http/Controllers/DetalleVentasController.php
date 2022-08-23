@@ -46,8 +46,6 @@ class DetalleVentasController extends Controller
      */
     public function show($id)
     {
-        $detalleVentas = DetalleVentas::where('venta_id', $id)->get();
-        return $detalleVentas[0]->Producto;
     }
 
 

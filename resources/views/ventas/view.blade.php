@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Ver recepcion')
+@section('title', 'Ver venta')
 
 @section('content_header')
-    <h2>Ver recepcion</h2>
+    <h2>Ver venta </h2>
 @stop
 
 
@@ -12,7 +12,7 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">
-                Recepcion {{ $recepcion->id }}</h3>
+                Venta {{ $venta->id }}</h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fas fa-minus"></i></button>
@@ -23,15 +23,19 @@
         <div class="card-body">
             <div class="col-md-6">
                 <ul>
-                    <li><strong>Proveedor: </strong>{{ $recepcion->Proveedor->nombre_fantasia }}
-                        ({{ $recepcion->Proveedor->rut }})</li>
-                    <li><strong>Fecha recepcion:</strong> {{ date('d-m-Y', strtotime($recepcion->fecha_recepcion)) }}</li>
-                    <li><strong> {{ $recepcion->documentos->tipo_documento }}:</strong> {{ $recepcion->documento }}</li>
+                    <li><strong>Cliente: </strong>{{ $venta->Cliente->nombre }}
+                        ({{ $venta->CLiente->rut }})</li>
+                    <li><strong>Fecha venta:</strong> {{ date('d-m-Y', strtotime($venta->created_at)) }}</li>
+                    <li><strong> {{ $venta->TipoDocumento->tipo_documento }}:</strong> {{ $venta->documento }}</li>
                     <li><strong>Monto total:</strong>
-                        ${{ number_format($recepcion->total_neto + $recepcion->total_iva, 0, ',', '.') }}</li>
-                    <li><strong>Unidades:</strong> {{ number_format($recepcion->unidades, 0, ',', '.') }}</li>
-                    <li><strong>Observaciones: </strong>{{ $recepcion->observaciones }}</li>
-                    <li><strong>Usuario: </strong> {{ $recepcion->user->name }}</li>
+                        ${{ number_format($venta->monto_neto + $venta->monto_imp, 0, ',', '.') }}</li>
+                    <li><strong>Costo total:</strong>
+                        ${{ number_format($venta->costo_neto + $venta->costo_imp, 0, ',', '.') }}</li>
+                    <li><strong>Ganancia total:</strong>
+                        ${{ number_format($venta->monto_neto + $venta->monto_imp - ($venta->costo_neto + $venta->costo_imp), 0, ',', '.') }}
+                    </li>
+                    <li><strong>Unidades:</strong> {{ number_format($venta->unidades, 0, ',', '.') }}</li>
+                    <li><strong>Usuario: </strong> {{ $venta->user->name }}</li>
                 </ul>
             </div>
 
@@ -40,7 +44,7 @@
 
         <!-- /.card-body -->
         <div class="card-footer">
-            Recepcion
+            Venta
         </div>
         <!-- /.card-footer-->
     </div>
@@ -48,7 +52,7 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">
-                Detalle recepcion {{ $recepcion->id }}</h3>
+                Detalle venta {{ $venta->id }}</h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                     title="Collapse">
@@ -70,14 +74,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($detalle as $d)
+                    @foreach ($detalleVentas as $d)
                         <tr>
                             <th>{{ $d->Producto->cod_interno }}</th>
                             <td>{{ $d->Producto->descripcion }}</td>
                             <td>{{ number_format($d->cantidad, 0, ',', '.') }}</td>
-                            <td>${{ number_format($d->precio_unitario, 0, ',', '.') }}</td>
-                            <td>${{ number_format($d->impuesto_unitario, 0, ',', '.') }}</td>
-                            <td>${{ number_format(($d->precio_unitario + $d->impuesto_unitario) * $d->cantidad, 0, ',', '.') }}
+                            <td>${{ number_format($d->precio_neto, 0, ',', '.') }}</td>
+                            <td>${{ number_format($d->precio_imp, 0, ',', '.') }}</td>
+                            <td>${{ number_format(($d->precio_neto + $d->precio_imp) * $d->cantidad, 0, ',', '.') }}
                             </td>
                         </tr>
                     @endforeach
@@ -120,9 +124,9 @@
                         {
                             extend: 'pdfHtml5',
                             text: 'PDF',
-                            filename: 'Recepcion.pdf',
+                            filename: 'Venta.pdf',
 
-                            title: 'Recepcion {{ $recepcion->id }}',
+                            title: 'Venta {{ $venta->id }}',
                             pageSize: 'LETTER',
 
 

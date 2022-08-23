@@ -79,4 +79,7 @@ Route::post('Recepciones/Finalizar', [RecepcionesController::class, 'store'])->n
 
 //ventas
 Route::get('Ventas', [VentasController::class, 'index'])->name('ventas.index');
-Route::get('Ventas/{id}', [DetalleVentasController::class, 'show'])->name('ventas.show');
+Route::get('Ventas/Agregar', [VentasController::class, 'create'])->name('ventas.create');
+Route::get('Ventas/{id}', [VentasController::class, 'show'])->name('ventas.show');
+Route::post('Ventas/Agregar', [VentasController::class, 'addArticulo'])->name('ventas.addarticulo');
+Route::post('Ventas/Finalizar', [VentasController::class, 'store'])->name('ventas.store');

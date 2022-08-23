@@ -16,4 +16,12 @@ class Ventas extends Model
     {
         return $this->belongsTo(Cliente::class);
     }
+    public function MedioDePago()
+    {
+        return $this->belongsTo(mediosdepago::class, 'medio_pago_id', 'id');
+    }
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

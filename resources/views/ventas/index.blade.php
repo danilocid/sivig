@@ -23,8 +23,9 @@
                             <td>Cliente</td>
                             <td>Documento</td>
                             <td>Monto</td>
-                            <td>Usuario</td>
+                            <td>Medio de pago</td>
                             <td>Fecha</td>
+                            <td>Usuario</td>
                             <td>Ver</td>
                         </tr>
                     </thead>
@@ -35,7 +36,9 @@
                                 <td>{{ $v->Cliente->nombre }} ({{ $v->Cliente->rut }})</td>
                                 <td>{{ $v->TipoDocumento->tipo_documento }}: {{ $v->documento }}</td>
                                 <td>$ {{ number_format($v->monto_neto + $v->monto_imp, 0, '', '.') }}</td>
-                                <td>{{ $v }}</td>
+                                <td>{{ $v->MedioDePago->medio_de_pago }}</td>
+                                <td>{{ date('d-m-Y H:s', strtotime($v->created_at)) }}</td>
+                                <td>{{ $v->user->name }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <a type="button" class="btn btn-success"
@@ -48,7 +51,7 @@
                 </table>
                 <br />
                 <div class="btn-group">
-                    <a type="button" class="btn btn-success" href="{{ route('recepciones.create') }}">Agregar recepcion</a>
+                    <a type="button" class="btn btn-success" href="{{ route('ventas.create') }}">Agregar venta</a>
                 </div>
             </div>
         </div>

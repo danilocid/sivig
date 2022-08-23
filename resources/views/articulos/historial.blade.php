@@ -95,7 +95,8 @@
                                     @break
 
                                     @case(2)
-                                        <a type="button" class="btn btn-success" href="">Venta</a>
+                                        <a type="button" class="btn btn-success"
+                                            href="{{ route('ventas.show', $h->id_movimiento) }}">Venta</a>
                                     @break
 
                                     @default

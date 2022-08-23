@@ -28,6 +28,7 @@ class VentasSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'user_id' => 1,
+            'unidades' => 2,
 
         ]);
     }

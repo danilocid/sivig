@@ -22,6 +22,7 @@ class CreateVentasTable extends Migration
             $table->foreignId('tipo_documentos_id')->constrained();
             $table->integer('documento');
             $table->foreignId('cliente_id')->constrained();
+            $table->integer('unidades');
             $table->foreignId('medio_pago_id')->constrained($tables = 'mediosdepagos');
             $table->timestamps();
             $table->foreignId('user_id')->constrained();
