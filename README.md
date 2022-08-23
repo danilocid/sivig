@@ -23,21 +23,19 @@ SIVIG es un sistema de gestion de inventario, ventas y gastos para una pequeña 
 
 # Que esta en desarrollo:
 
--   agregar recepciones de articulos
+-   modulo de reportes
 
 # Que hara en un futuro (fallas y/o funciones futuras):
 
 ### Ventas
 
--   falta logica completa
--
+-   falta generacion de PDF tipo boleta
+
 
 ### Articulos
 
 -   falta agregar margen de ganancias
 -   falta alerta de stock critico
--   falta movimientos de articulos
--   falta boton para ver detalle de moviemiento de articulos
 -   validar documento de recepcion (tipo y numero)
 -   falta ID de articulo en publicaiones en mercado libre y prestashop
 
