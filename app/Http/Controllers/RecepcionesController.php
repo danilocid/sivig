@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\DetalleRecepcion;
 use App\Models\Recepciones;
-use App\models\Articulo;
-use App\models\Proveedor;
+use App\Models\Articulo;
+use App\Models\Proveedor;
 use App\Models\tipo_documento;
 use App\Models\DetalleMovimientosArticulos;
 use Illuminate\Http\Request;

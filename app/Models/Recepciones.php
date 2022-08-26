@@ -23,7 +23,7 @@ class Recepciones extends Model
     {
         // return $this->belongsTo(proveedor::class);
 
-        return $this->belongsTo(proveedor::class);
+        return $this->belongsTo(Proveedor::class);
     }
 
 

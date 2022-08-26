@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articulo;
-use App\models\Proveedor;
+use App\Models\Proveedor;
 use App\Models\tipo_documento;
 use Illuminate\Http\Request;
 use App\Models\DetalleMovimientosArticulos;
