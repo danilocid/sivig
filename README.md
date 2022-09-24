@@ -20,12 +20,16 @@ SIVIG es un sistema de gestion de inventario, ventas y gastos para una pequeña 
 ## Aticulos
 
 -   crear y editar articulos
+-   agregar recepciones de articulos
+-   agregar ajustes de articulos
 
 # Que esta en desarrollo:
 
--   modulo de reportes
+-   modulo de ajustes de inventario
 
 # Que hara en un futuro (fallas y/o funciones futuras):
+
+- modulo de reportes
 
 ### Ventas
 
@@ -71,7 +75,7 @@ SIVIG es un sistema de gestion de inventario, ventas y gastos para una pequeña 
 -   en pantalla de inicio faltan widget con datos resumen (ventas, saldo en cuentas bancarias, etc)
 -   Falta integracion con API MercadoLibre
 -   Falta integracion con API Prestashop
--   Falta integracion con ApiSii.cl https://apisii.cl/ (api se bloquea por 3 dias si se reciben consultas con error)
+-   Falta integracion con API SimpleApi https://www.simpleapi.cl/
 
 # Comandos utiles
 

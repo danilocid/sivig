@@ -59,7 +59,7 @@
                         {{ number_format(($articulo->venta_neto + $articulo->venta_imp) * $articulo->stock, 0, '', '.') }}
                     </p>
                     <p><strong>Margen de venta:
-                        </strong>{{ number_format((($articulo->venta_neto + $articulo->venta_imp - ($articulo->costo_neto + $articulo->costo_imp)) / ($articulo->costo_neto + $articulo->costo_imp)) * 100, 2, ',', '.') }}%
+                        </strong>{{ number_format((($articulo->venta_neto + $articulo->venta_imp - ($articulo->costo_neto + $articulo->costo_imp)) / ($articulo->venta_neto + $articulo->venta_imp)) * 100, 2, ',', '.') }}%
                     </p>
                 </div>
             </div>
@@ -97,6 +97,11 @@
                                     @case(2)
                                         <a type="button" class="btn btn-success"
                                             href="{{ route('ventas.show', $h->id_movimiento) }}">Venta</a>
+                                    @break
+
+                                    @case(4)
+                                        <a type="button" class="btn btn-success"
+                                            href="{{ route('ajustesdeinventario.view', $h->id_movimiento) }}">Ajuste</a>
                                     @break
 
                                     @default

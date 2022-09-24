@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AjustesDeInventarioController;
 use App\Http\Controllers\ArticulosController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ComunasController;
@@ -83,3 +84,10 @@ Route::get('Ventas/Agregar', [VentasController::class, 'create'])->name('ventas.
 Route::get('Ventas/{id}', [VentasController::class, 'show'])->name('ventas.show');
 Route::post('Ventas/Agregar', [VentasController::class, 'addArticulo'])->name('ventas.addarticulo');
 Route::post('Ventas/Finalizar', [VentasController::class, 'store'])->name('ventas.store');
+
+//ventas
+Route::get('AjustesDeInventario', [AjustesDeInventarioController::class, 'index'])->name('ajustesdeinventario.index');
+Route::get('AjustesDeInventario/Agregar', [AjustesDeInventarioController::class, 'create'])->name('ajustesdeinventario.create');
+Route::get('AjustesDeInventario/{id}', [AjustesDeInventarioController::class, 'view'])->name('ajustesdeinventario.view');
+Route::post('AjustesDeInventario/Agregar', [AjustesDeInventarioController::class, 'addArticulo'])->name('ajustesdeinventario.addarticulo');
+Route::post('AjustesDeInventario/Finalizar', [AjustesDeInventarioController::class, 'store'])->name('ajustesdeinventario.store');
